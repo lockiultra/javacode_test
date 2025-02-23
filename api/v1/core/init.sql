@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS wallets (
+    wallet_uuid UUID PRIMARY KEY,
+    amount FLOAT NOT NULL DEFAULT 0.0
+);
