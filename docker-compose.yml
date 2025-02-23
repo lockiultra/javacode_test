@@ -29,5 +29,16 @@ services:
       timeout: 5s
       retries: 10
       start_period: 5s
+
+  liquibase:
+    image: liquibase/liquibase:latest
+    volumes:
+      - .:/liquibase/workspace
+    working_dir: /liquibase/workspace
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+    command: --defaultsFile=liquibase/changelog/liquibase.properties update    
 volumes:
   pgdata:
