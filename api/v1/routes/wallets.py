@@ -17,7 +17,7 @@ async def create_wallet(db: AsyncSession = Depends(get_db)):
 
 
 @wallet_router.post('/{wallet_uuid}/operation')
-async def wallet_operation(wallet_uuid: UUID, w_operation: WalletOperation = Depends(), db: AsyncSession = Depends(get_db)):
+async def wallet_operation(wallet_uuid: UUID, w_operation: WalletOperation, db: AsyncSession = Depends(get_db)):
     return await WalletRepository.wallet_operation(db=db, wallet_uuid=wallet_uuid, operation=w_operation.operation, amount=w_operation.amount)
 
 
