@@ -8,10 +8,10 @@ from api.v1.models import wallet
 from api.v1.models.base import Base
 from api.v1.core.db import get_db
 from api.v1.main import app
-from api.v1.schemas.wallet import WalletOperation
 
 
 DATABASE_URL = "sqlite+aiosqlite:///:memory:?cache=shared"
+
 
 engine = create_async_engine(
     DATABASE_URL,
@@ -20,6 +20,7 @@ engine = create_async_engine(
     future=True,
 )
 TestingSessionLocal = async_sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=False)
+
 
 @pytest.fixture(scope="session", autouse=True)
 def prepare_database():
@@ -32,7 +33,6 @@ def prepare_database():
         async with engine.begin() as conn:
             await conn.run_sync(Base.metadata.drop_all)
     asyncio.run(do_drop())
-
 
 
 async def override_get_db():
